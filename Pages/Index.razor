@@ -1,0 +1,15 @@
+﻿@page "/"
+
+@inject HttpClient Http
+
+<button @onclick="clickEvent">Web API call</button>
+
+@code {
+    public static System.Text.Encoding UTF8 { get; }
+    string text = "Testing";
+    public async Task clickEvent()
+    {
+        HttpContent httpContent = new StringContent(text, UTF8, "application/json");
+        var id = await Http.PostAsync("https://localhost:7084/api/Home/PostCount", httpContent);
+    }
+}
